@@ -12,9 +12,15 @@ def bin_to_int_key(bin_key):
     int_key = zero + one
     return int_key
 
-def chained_cnot(n, KAT, qc):
+def chained_cnot_enc(n, KAT, qc):
     # n = len(P)
     for i in range(0,n):
+        if i != KAT[i]:
+            qc.cnot(i, KAT[i])
+
+def chained_cnot_dec(n, KAT, qc):
+    # n = len(P)
+    for i in reversed(range(0,n)):
         if i != KAT[i]:
             qc.cnot(i, KAT[i])
 
@@ -26,3 +32,4 @@ def qotp(n, KAT_2n, qc):
             qc.x(i)
         if KAT_2n[2*i+1]:
             qc.z(i)
+
