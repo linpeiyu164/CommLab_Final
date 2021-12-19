@@ -4,6 +4,7 @@ from numpy.random import randint
 import numpy as np
 
 def encode_message(bits, bases):
+    n = len(bits)
     message = []
     for i in range(n):
         qc = QuantumCircuit(1,1)
@@ -23,6 +24,7 @@ def encode_message(bits, bases):
     return message
 
 def measure_message(message, bases):
+    n = len(bases)
     backend = Aer.get_backend('aer_simulator')
     measurements = []
     for q in range(n):
@@ -39,6 +41,7 @@ def measure_message(message, bases):
     return measurements
 
 def remove_garbage(a_bases, b_bases, bits):
+    n = len(a_bases)
     good_bits = []
     for q in range(n):
         if a_bases[q] == b_bases[q]:
@@ -56,8 +59,8 @@ def sample_bits(bits, selection):
 def QKD(key_len):
     # generate random key for Alice
     n = key_len*5
-    alice_bit = randint(2,size=n)
-    alice_base = randint(2,size=n)
+    alice_bits = randint(2,size=n)
+    alice_bases = randint(2,size=n)
     message = encode_message(alice_bits, alice_bases)
     
     # teleport to Bob 
