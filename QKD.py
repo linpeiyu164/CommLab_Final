@@ -2,6 +2,34 @@ from qiskit import QuantumCircuit, Aer, transpile, assemble
 from qiskit.visualization import plot_histogram, plot_bloch_multivector
 from numpy.random import randint
 import numpy as np
+from math import sqrt
+
+# randomness test
+def runsTest(l, l_median):
+
+    runs, n1, n2 = 0, 0, 0
+
+    # Checking for start of new run
+    for i in range(len(l)):
+
+        # no. of runs
+        if (l[i] >= l_median and l[i-1] < l_median) or \
+                (l[i] < l_median and l[i-1] >= l_median):
+            runs += 1
+
+        # no. of positive values
+        if(l[i]) >= l_median:
+            n1 += 1
+
+        # no. of negative values
+        else:
+            n2 += 1
+
+    runs_exp = ((2*n1*n2)/(n1+n2))+1
+    stan_dev = math.sqrt((2*n1*n2*(2*n1*n2-n1-n2))/ \
+                    (((n1+n2)**2)*(n1+n2-1)))
+    z = (runs-runs_exp)/stan_dev
+    return z
 
 def encode_message(bits, bases):
     n = len(bits)
@@ -59,8 +87,17 @@ def sample_bits(bits, selection):
 def QKD(key_len):
     # generate random key for Alice
     n = key_len*5
-    alice_bits = randint(2,size=n)
-    alice_bases = randint(2,size=n)
+    # check if bits are random enough
+    flag = 0
+    while flag == 0:
+        alice_bits = randint(2,size=n)
+        alice_bases = randint(2,size=n)
+        Z1 = abs(runsTest(alice_bits, 0.5))
+        Z2 = abs(runsTest(alice_bases, 0.5))
+        if (Z1<1.96) and (Z2<1.96): # confidence level of 95%
+            flag = 1
+            #print('pass random test!')
+    # encode it into quantum bits
     message = encode_message(alice_bits, alice_bases)
     
     # teleport to Bob 
