@@ -24,7 +24,7 @@ def chained_cnot_dec(n, KAT, qc):
         if i != KAT[i]:
             qc.cnot(i, KAT[i])
 
-def qotp(n, KAT_2n, qc):
+def qotp_enc(n, KAT_2n, qc):
     # n = len(P)
     # KAT has length 2n
     for i in range(0,n):
@@ -32,4 +32,3 @@ def qotp(n, KAT_2n, qc):
             qc.x(i)
         if KAT_2n[2*i+1]:
             qc.z(i)
-
