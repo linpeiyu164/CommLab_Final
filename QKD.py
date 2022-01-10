@@ -1,8 +1,9 @@
+from os import name
 from qiskit import QuantumCircuit, Aer, transpile, assemble
 from qiskit.visualization import plot_histogram, plot_bloch_multivector
 from numpy.random import randint
 import numpy as np
-from math import sqrt
+import math
 
 # randomness test
 def runsTest(l, l_median):
@@ -122,6 +123,7 @@ def QKD(key_len):
         return alice_sample
     else:
         raise ExampleError("key has been intercepted!!!")
-    
-key = QKD(20)
-print(key)
+
+if __name__ == "__main__": 
+    key = QKD(20)
+    print(key)
