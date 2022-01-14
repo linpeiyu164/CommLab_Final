@@ -7,9 +7,11 @@ The two files contain simulations for two AQS schemes. One uses the chained CNOT
 
 ## General
 
+* **QKD protocol** : the quantum signature is built on a QKD protocol. The protocol ensures the security of the shared keys between Alice, Trent and Bob, Trent. The generated random string is also passed through a randomness test to ensure the randomness of the string.
+
 For both protocols, Alice acts as the signatory, Bob as the receiver and Trent as the arbitrator. The protocols can be divided into 4 phases each : 
 
-* **Initializing Phase** : Prepares and distributes QKD keys **K_AT, K_BT** and Entangled Bell states for Alice and Bob. Alice generates message **P**. Usually more than one copy of the message will be created. 
+* **Initializing Phase** : Prepares and distributes QKD keys **K_AT, K_BT** and Entangled Bell states **create_bell_states** for Alice and Bob. Alice generates message **P**. Usually more than one copy of the message will be created. 
 
 * **Signing Phase** : Alice creates her signature using encryption methods(chained CNOT or QOTP). Alice also performs bell measurement on her message bit and her entangled Bell State.
 
@@ -21,14 +23,11 @@ For both protocols, Alice acts as the signatory, Bob as the receiver and Trent a
 
 * **QOTP Encryption** : QOTP encryption method applies Pauli-x to a qubit when key[2\*i] = 1, and Pauli-z when key[2\*i+1] = 1. ![alt text](images/qotp.png?raw=true)
 
-* **Chained-CNOT Encryption** : Chained-CNOT encryption encrypts creates n/2 pairs of control-target pairs based on the encryption key using the CNOT gate. ![alt text](images/chained_cnot_encryption.png?raw=true)
-
-
+* **Chained-CNOT Encryption** : Chained-CNOT encryption encrypts creates n pairs of control-target pairs based on the encryption key using the CNOT gate. ![alt text](images/chained_cnot_encryption.png?raw=true)
 
 ## State Comparison
 
 * **SWAP test** : multiple qubit SWAP test is used for state comparison. This allows us to check if 2 multiple qubits states are identical or not. Each test requires one ancilla bit.![alt text](images/swaptest.png?raw=true)
-
 
 ## Security Test
 
