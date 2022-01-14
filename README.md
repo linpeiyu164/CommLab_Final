@@ -19,15 +19,21 @@ For both protocols, Alice acts as the signatory, Bob as the receiver and Trent a
 
 ## Encryption Methods
 
-* **QOTP Encryption** : QOTP encryption method applies Pauli-x to a qubit when key[2\*i] = 1, and Pauli-z when key[2\*i+1] = 1. ![alt text](images/qotp.png?raw=true)
+* **QOTP Encryption** : QOTP encryption method applies Pauli-x to a qubit when key[2\*i] = 1, and Pauli-z when key[2\*i+1] = 1. 
 
-* **Chained-CNOT Encryption** : Chained-CNOT encryption encrypts creates n/2 pairs of control-target pairs based on the encryption key using the CNOT gate. ![alt text](images/chained_cnot_encryption.png?raw=true)
+![alt text](images/qotp.png?raw=true)
+
+* **Chained-CNOT Encryption** : Chained-CNOT encryption encrypts creates n/2 pairs of control-target pairs based on the encryption key using the CNOT gate. 
+
+![alt text](images/chained_cnot_encryption.png?raw=true)
 
 
 
 ## State Comparison
 
-* **SWAP test** : multiple qubit SWAP test is used for state comparison. This allows us to check if 2 multiple qubits states are identical or not. Each test requires one ancilla bit.![alt text](images/swaptest.png?raw=true)
+* **SWAP test** : multiple qubit SWAP test is used for state comparison. This allows us to check if 2 multiple qubits states are identical or not. Each test requires one ancilla bit.
+
+![alt text](images/swaptest.png?raw=true)
 
 
 ## Security Test
